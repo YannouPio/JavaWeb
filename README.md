@@ -20,7 +20,7 @@ javaweb-basic
 
 ### 第1周作业
 
-![第1周作业](resource\img\1.png)
+![第1周作业]([resource\img\1.png](https://github.com/zhanglingxi777/javaweb-basic/blob/main/resource/img/1.1.png))
 1. 打开cmd，进入resource -> nginx-1.23.1，执行`start nginx`命令
 ![第1周作业](resource\img\1.1.png)
 2. 打开浏览器，在地址栏输入`http://localhost/`
