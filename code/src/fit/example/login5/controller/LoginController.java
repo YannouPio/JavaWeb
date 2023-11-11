@@ -13,13 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
 @WebServlet("/5/login")
 public class LoginController extends HttpServlet {
-    private static final Map<String, String> LOGIN_USER = new HashMap<>();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, Object> imageCode = ImageCodeUtils.genImageCode();
@@ -64,6 +62,7 @@ public class LoginController extends HttpServlet {
                 req.setAttribute("message", "密码错误！");
                 req.getRequestDispatcher("/login.jsp").forward(req, resp);
             } else {
+                session.setAttribute("login_user", username);
                 resp.sendRedirect(req.getContextPath() + "/user/list");
             }
         }
