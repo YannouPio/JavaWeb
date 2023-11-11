@@ -1,5 +1,7 @@
 package fit.example.login5.controller;
 
+import fit.example.login5.dao.UserDAO;
+import fit.example.login5.model.UserBean;
 import fit.example.login5.utils.ImageCodeUtils;
 
 import javax.imageio.ImageIO;
@@ -42,15 +44,24 @@ public class LoginController extends HttpServlet {
             String username = req.getParameter("username");
             String password = req.getParameter("password");
             String verify = req.getParameter("verify");
+            // 获取用户信息
+            UserBean user = null;
+            try {
+                UserDAO userDAO = new UserDAO();
+                user = userDAO.getUserByUsername(username);
+            } catch (Exception e) {
+                req.setAttribute("message", "系统异常！");
+                req.getRequestDispatcher("/login.jsp").forward(req, resp);
+                throw new RuntimeException(e);
+            }
             if (!verifyCode.toString().equals(verify)) {
                 req.setAttribute("message", "验证码错误！");
                 req.getRequestDispatcher("/login.jsp").forward(req, resp);
-            } else if (!"admin".equals(username)) {
+            } else if (Objects.isNull(user)) {
                 req.setAttribute("message", "用户名错误！");
                 req.getRequestDispatcher("/login.jsp").forward(req, resp);
-            } else if (!"admin123".equals(password)) {
+            } else if (!user.getUserPwd().equals(password)) {
                 req.setAttribute("message", "密码错误！");
-                System.out.println("/login.jsp");
                 req.getRequestDispatcher("/login.jsp").forward(req, resp);
             } else {
                 resp.sendRedirect(req.getContextPath() + "/user/list");

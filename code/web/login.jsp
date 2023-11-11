@@ -11,6 +11,7 @@
     <meta charset="utf-8">
     <title>第五周</title>
     <script src="<%=request.getContextPath() + "/js/jquery-3.7.1.js"%>"></script>
+    <script src="<%=request.getContextPath() + "/js/md5.js"%>"></script>
     <style>
         html {
             background-color: #B5DEF2;
@@ -142,7 +143,7 @@
     Object message = request.getAttribute("message");
 %>
 <div class="wrapper">
-    <form id="loginForm" action="<%=request.getContextPath()%>/5/login" method="post" onsubmit="submitForm()">
+    <form id="loginForm" action="<%=request.getContextPath()%>/5/login" method="post" onsubmit="return submitForm()">
         <div class="loginBox">
             <div class="loginBoxCenter">
                 <p><label>用户名：</label></p>
@@ -166,10 +167,10 @@
                          alt="verifyCode"/>
                 </div>
                 <div class="loginBottomBox">
+                    <p><a class="forgetLink" href="#">忘记密码?</a></p>
                     <p style="display: <%=Objects.nonNull(message) ? "inline-block" : "none"%>;" class="message">
                         <%=Objects.nonNull(message) ? message.toString() : ""%>
                     </p>
-                    <p><a class="forgetLink" href="#">忘记密码?</a></p>
                 </div>
             </div>
             <div class="loginBoxButtons">
@@ -182,6 +183,7 @@
 <script>
     let vcImg = document.querySelector("#vcImg");
     let loginForm = document.querySelector("#loginForm");
+    let password = document.querySelector("#password");
 
     function refreshVc() {
         let time = new Date().getTime();
@@ -189,7 +191,8 @@
     }
 
     function submitForm() {
-
+        // 对密码进行md5加密
+        password.value = md5(password.value);
     }
 </script>
 </html>

@@ -46,6 +46,7 @@ public class UserDAO {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
+            rs.next();
             UserBean user = new UserBean();
             int userId = rs.getInt(1);
             String userName = rs.getString(2);
