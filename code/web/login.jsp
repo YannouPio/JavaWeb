@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.util.Objects" %><%--
   Created by IntelliJ IDEA.
   User: Carl
   Date: 2023/11/10
@@ -120,18 +120,36 @@
             border: 1px solid black;
             cursor: pointer;
         }
+
+        .loginBottomBox {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .loginBottomBox p {
+            margin: 0;
+        }
+
+        .message {
+            font-weight: bold;
+            color: red;
+        }
     </style>
 </head>
 <body>
+<%
+    Object message = request.getAttribute("message");
+%>
 <div class="wrapper">
-    <form id="loginForm" action="<%=request.getContextPath()%>/5/login" method="post">
+    <form id="loginForm" action="<%=request.getContextPath()%>/5/login" method="post" onsubmit="submitForm()">
         <div class="loginBox">
             <div class="loginBoxCenter">
                 <p><label>用户名：</label></p>
                 <!--autofocus 规定当页面加载时按钮应当自动地获得焦点。 -->
                 <!-- placeholder提供可描述输入字段预期值的提示信息-->
-                <p><input type="text" id="text" name="text" class="loginInput" autofocus="autofocus" required="required"
-                          autocomplete="off" placeholder="请输入邮箱/手机号" value=""/></p>
+                <p><input type="text" id="text" name="username" class="loginInput" autofocus="autofocus" required="required"
+                          autocomplete="off" placeholder="请输入用户名" value=""/></p>
                 <!-- required 规定必需在提交之前填写输入字段-->
                 <p><label>密码：</label></p>
                 <p><input type="password" id="password" name="password" class="loginInput" required="required"
@@ -147,8 +165,12 @@
                          src="<%=request.getContextPath() + "/5/login"%>"
                          alt="verifyCode"/>
                 </div>
-
-                <p><a class="forgetLink" href="#">忘记密码?</a></p>
+                <div class="loginBottomBox">
+                    <p style="display: <%=Objects.nonNull(message) ? "inline-block" : "none"%>;" class="message">
+                        <%=Objects.nonNull(message) ? message.toString() : ""%>
+                    </p>
+                    <p><a class="forgetLink" href="#">忘记密码?</a></p>
+                </div>
             </div>
             <div class="loginBoxButtons">
                 <button class="loginBtn">登录</button>
@@ -166,7 +188,8 @@
         vcImg.src = "/javaweb/5/login?time=" + time;
     }
 
+    function submitForm() {
 
-
+    }
 </script>
 </html>

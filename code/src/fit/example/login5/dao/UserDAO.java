@@ -39,4 +39,29 @@ public class UserDAO {
         }
         return ret;
     }
+
+    public UserBean getUserByUsername(String username) {
+        try {
+            String sql = "select * from tb_user where user_name = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            UserBean user = new UserBean();
+            int userId = rs.getInt(1);
+            String userName = rs.getString(2);
+            String userPhone = rs.getString(3);
+            String loginPwd = rs.getString(4);
+            String loginCode = rs.getString(5);
+            int userType = rs.getInt(6);
+            user.setUserId(userId);
+            user.setUserName(userName);
+            user.setUserPhone(userPhone);
+            user.setUserType(userType);
+            user.setUserPwd(loginPwd);
+            user.setUserStatus(loginCode);
+            return user;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
