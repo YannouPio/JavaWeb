@@ -24,23 +24,13 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../resource/jar/fastjson-1.2.83.jar!/" />
+          <root url="file://$MODULE_DIR$/lib" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/lib" recursive="false" />
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../resource/jar/mysql-connector-j-8.1.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="library" name="fastjson-1.2.83" level="project" />
-    <orderEntry type="library" name="mysql-connector-j-8.1.0" level="project" />
-    <orderEntry type="library" name="jsp-api" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
   </component>
 </module>

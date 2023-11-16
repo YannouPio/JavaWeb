@@ -2,7 +2,7 @@
 <html lang="zh-cn">
 <head>
     <meta charset="utf-8">
-    <title>第六周</title>
+    <title>第七周</title>
     <script src="../js/md5.js"></script>
     <style>
         html {
@@ -180,7 +180,7 @@
             e.preventDefault();
             $.ajax({
                 type: "post",
-                url: "/6/login",
+                url: "/7/login",
                 data: JSON.stringify(data)
             }).then(response => {
                 let data = JSON.parse(response);
@@ -196,7 +196,7 @@
     function refreshVc() {
         $.ajax({
             type: "get",
-            url: '/6/login',
+            url: '/7/login',
             param: {uuid: uuid}
         }).then(response => {
             let data = JSON.parse(response);

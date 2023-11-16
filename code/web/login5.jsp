@@ -187,7 +187,7 @@
 
     function refreshVc() {
         let time = new Date().getTime();
-        vcImg.src = "/javaweb/5/login?time=" + time;
+        vcImg.src =  "/5/login?time=" + time;
     }
 
     function submitForm() {

@@ -37,7 +37,7 @@ public class LoginController extends HttpServlet {
         Object verifyCode = session.getAttribute("verify_code");
         if (Objects.isNull(verifyCode)) {
             req.setAttribute("message", "验证码错误，请重新刷新页面！");
-            req.getRequestDispatcher( req.getContextPath() + "/login.jsp").forward(req, resp);
+            req.getRequestDispatcher( req.getContextPath() + "/login5.jsp").forward(req, resp);
         } else {
             String username = req.getParameter("username");
             String password = req.getParameter("password");
@@ -49,21 +49,21 @@ public class LoginController extends HttpServlet {
                 user = userDAO.getUserByUsername(username);
             } catch (Exception e) {
                 req.setAttribute("message", "系统异常！");
-                req.getRequestDispatcher("/login.jsp").forward(req, resp);
+                req.getRequestDispatcher("/login5.jsp").forward(req, resp);
                 throw new RuntimeException(e);
             }
             if (!verifyCode.toString().equals(verify)) {
                 req.setAttribute("message", "验证码错误！");
-                req.getRequestDispatcher("/login.jsp").forward(req, resp);
+                req.getRequestDispatcher("/login5.jsp").forward(req, resp);
             } else if (Objects.isNull(user)) {
                 req.setAttribute("message", "用户名错误！");
-                req.getRequestDispatcher("/login.jsp").forward(req, resp);
+                req.getRequestDispatcher("/login5.jsp").forward(req, resp);
             } else if (!user.getUserPwd().equals(password)) {
                 req.setAttribute("message", "密码错误！");
-                req.getRequestDispatcher("/login.jsp").forward(req, resp);
+                req.getRequestDispatcher("/login5.jsp").forward(req, resp);
             } else {
                 session.setAttribute("login_user", username);
-                resp.sendRedirect(req.getContextPath() + "/user/list");
+                resp.sendRedirect(req.getContextPath() + "/week5.jsp");
             }
         }
     }
