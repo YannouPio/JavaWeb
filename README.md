@@ -1,5 +1,5 @@
 # javaweb-basic
-Java Web实验课作业基础版
+Java Web实验课作业
 
 ## 项目结构
 
