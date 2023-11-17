@@ -14,6 +14,7 @@ javaweb-basic
         -- img 图片
         -- sql sql文件
         -- nginx-1.23.1 nginx服务器
+        -- Redis-x64-3.0.504.msi redis安装包
     -- .gitignore gitignore文件
     -- README.md 文档
 ```
