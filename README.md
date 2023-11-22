@@ -15,6 +15,7 @@ javaweb-basic
         -- sql sql文件
         -- nginx-1.23.1 nginx服务器
         -- Redis-x64-3.0.504.msi redis安装包
+        -- Another-Redis-Desktop-Manager.1.6.1.exe Redis客户端工具
     -- .gitignore gitignore文件
     -- README.md 文档
 ```
