@@ -26,6 +26,7 @@ javaweb-basic
 ![tomcat2](resource/img/tomcat2.png)
 
 2. 安装MySQL数据库，新建javaweb数据库，执行resource -> sql -> javaweb-dump.sql
+![tb_user](resource/img/tb_user.png)
 
 3. 修改code -> src -> login5 -> utils -> DBConn.java中的配置
 ![DBConn](resource/img/DBConn.png)
