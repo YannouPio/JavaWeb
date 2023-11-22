@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import fit.example.login5.dao.UserDAO;
 import fit.example.login5.model.UserBean;
 import fit.example.login5.utils.ImageCodeUtils;
+import fit.example.login8.utils.JWTUtils;
 import fit.example.login8.utils.RedisUtils;
 import redis.clients.jedis.Jedis;
 
@@ -79,7 +80,10 @@ public class LoginController extends HttpServlet {
             resMap.put("message", "密码错误！");
             resMap.put("code", 500);
         } else {
-            jedis.hset("javaweb-week7-login", uuid, username);
+            Map<String, String> tokenInfo = new HashMap<>();
+            tokenInfo.put("username", username);
+            String token = JWTUtils.getToken(tokenInfo);
+            resMap.put("token", token);
             resMap.put("message", "登录成功！");
             resMap.put("code", 200);
         }

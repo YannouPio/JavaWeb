@@ -7,14 +7,14 @@
       <div class="card_body">
         <el-form style="display: flex;flex-direction: column;" class="login_form" :model="loginForm" ref="loginForm" :rules="loginRules">
           <el-form-item label="用户名" prop="username">
-            <el-input placeholder="请输入用户名" v-model="loginForm.username" clearable></el-input>
+            <el-input placeholder="请输入用户名" v-model="loginForm.username" clearable @keyup.enter="handleLogin"></el-input>
           </el-form-item>
           <el-form-item label="密码" prop="password">
-            <el-input placeholder="请输入密码" show-password v-model="loginForm.password" clearable></el-input>
+            <el-input placeholder="请输入密码" show-password v-model="loginForm.password" clearable @keyup.enter="handleLogin"></el-input>
           </el-form-item>
           <div style="display: flex;column-gap: 20px;align-items: center;">
             <el-form-item style="width: 200px;" label="验证码" prop="verifyCode">
-              <el-input placeholder="请输入验证码" v-model="loginForm.verifyCode" clearable></el-input>
+              <el-input placeholder="请输入验证码" v-model="loginForm.verifyCode" clearable @keyup.enter="handleLogin"></el-input>
             </el-form-item>
             <el-image @click="refreshVCImage" fit="fill" :src="verifyImage" style="width: 120px;height: 70px;border: 1px solid black;cursor: pointer;"></el-image>
           </div>
@@ -32,6 +32,7 @@
 </template>
 <script>
 import {getVerifyImage, login} from "@/api/login";
+import {setToken} from "@/utils/auth"
 import md5 from 'md5';
 export default {
   name: "Login",
@@ -70,8 +71,16 @@ export default {
     handleLogin() {
       this.$refs["loginForm"].validate((valid) => {
         if (valid) {
-          login(this.loginForm.username, md5(this.loginForm.password), this.loginForm.verifyCode, this.uuid).then(response => {
-            console.log(response)
+          login(this.loginForm.username, md5(this.loginForm.password),
+              this.loginForm.verifyCode, this.uuid).then(response => {
+            let message = response.message;
+            let code = response.code;
+            if (code === 200) {
+              setToken(response.token);
+              this.$router.push({path: "/person-center"})
+            } else {
+              this.$message.error(message);
+            }
           })
         }
       })

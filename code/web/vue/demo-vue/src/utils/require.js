@@ -1,5 +1,6 @@
 import axios from "axios";
 import {getToken} from '@/utils/auth'
+import {MessageBox} from "element-ui";
 
 let baseUrl = "/dev-api"
 const request = axios.create({
@@ -22,7 +23,17 @@ request.interceptors.request.use(config => {
 
 // 响应拦截器
 request.interceptors.response.use(response => {
-    return Promise.resolve(response.data)
+    if (response.data.code && response.data.code === 401) {
+        MessageBox.alert(
+            response.data.message,
+            "提示",
+            {type: "warning"}
+        ).then(r => {
+            console.log("跳转登录页面")
+            location.href = "/login";
+        });
+    }
+    return Promise.resolve(response.data);
 })
 
 export default request;
