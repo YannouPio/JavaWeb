@@ -46,3 +46,18 @@ javaweb-basic
 
 1. http://localhost:8080/html/login7.html
 2. 账号密码同上
+
+## 实验8
+
+在终端中打开 code -> web -> vue -> demo-vue，运行`npm install`，等待执行执行完毕，然后再运行`npm run dev`
+
+![start-vue](resource/img/start-vue.png)
+
+1. http://localhost:81/login
+2. 账号密码同上
+
+## 实验9
+在终端中打开 code -> web -> vue -> demo-vue，运行`npm run dev`
+
+1. http://localhost:81/login
+2. 账号密码同上
