@@ -22,7 +22,7 @@ public class ImageCodeUtils {
     // 图片的高度。
     private static int height = 40;
     // 验证码字符个数
-    private static int codeCount = 5;
+    private static int codeCount = 4;
     // 验证码干扰线数
     private static int lineCount = 150;
     // 验证码图片Buffer
@@ -64,11 +64,11 @@ public class ImageCodeUtils {
         // 生成随机数
         Random random = new Random();
         //设置字体类型、字体大小、字体样式　
-        Font font = new Font("微软雅黑 Light", Font.PLAIN, fontHeight);
+        Font font = new Font("微软雅黑 Light", Font.BOLD, fontHeight);
 
         graphics.setFont(font);
 
-        for (int i = 0; i < lineCount; i++) {
+        /*for (int i = 0; i < lineCount; i++) {
             // 设置随机开始和结束坐标
             int xs = random.nextInt(width);//x坐标开始
             int ys = random.nextInt(height);//y坐标开始
@@ -81,7 +81,7 @@ public class ImageCodeUtils {
             blue = random.nextInt(255);
             graphics.setColor(new Color(red, green, blue));
             graphics.drawLine(xs, ys, xe, ye);
-        }
+        }*/
 
         // randomCode记录随机产生的验证码
         StringBuilder randomCode = new StringBuilder();
@@ -105,12 +105,5 @@ public class ImageCodeUtils {
         result.put("code", code);
         result.put("image", buffImg);
         return result;
-       /* //登录成功创建一个Session对象，记录当前连接
-        HttpSession session = request.getSession(true);
-        session.setAttribute("randomCode", code);
-        // 将上面图片输出到浏览器 ImageIO
-        graphics.dispose();// 释放资源
-        ImageIO.setUseCache(false);// 防止Tomcat缓存
-        ImageIO.write(buffImg, "png", response.getOutputStream()); //注意有些情况修改图片格式为png*/
     }
 }
