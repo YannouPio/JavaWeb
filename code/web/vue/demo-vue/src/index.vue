@@ -1,20 +1,18 @@
 <template>
   <div class="app-container">
-    <div class="logo_box">
-      <el-image src="@/assets/image/bilibili.png" fit="fill"/>
-    </div>
+    <el-button type="primary" @click="toLogin">登录</el-button>
   </div>
 </template>
 <script>
 export default {
   name: "Index",
   data() {
-    return {
-
-    }
+    return {}
   },
   methods: {
-
+    toLogin() {
+      this.$router.push("/login");
+    }
   }
 }
 </script>

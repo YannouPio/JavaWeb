@@ -27,13 +27,13 @@
         </el-form>
       </div>
     </el-card>
-
   </div>
 </template>
 <script>
 import {getVerifyImage, login} from "@/api/login";
 import {setToken} from "@/utils/auth"
 import md5 from 'md5';
+import {SM4Util} from "sm4util";
 export default {
   name: "Login",
   data() {
@@ -71,8 +71,11 @@ export default {
     handleLogin() {
       this.$refs["loginForm"].validate((valid) => {
         if (valid) {
-          login(this.loginForm.username, md5(this.loginForm.password),
-              this.loginForm.verifyCode, this.uuid).then(response => {
+          const sm4 = new SM4Util()
+          login(this.loginForm.username,
+              sm4.encryptCustom_CBC(this.loginForm.password, "dA0jU4bN1sE5dB2v", "lN0dZ8uG4aY6iF4b"),
+              this.loginForm.verifyCode,
+              this.uuid).then(response => {
             let message = response.message;
             let code = response.code;
             if (code === 200) {

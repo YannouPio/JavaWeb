@@ -1,11 +1,14 @@
 package fit.example.login8.controller;
 
+import cn.hutool.crypto.digest.MD5;
 import com.alibaba.fastjson.JSONObject;
 import fit.example.login5.dao.UserDAO;
 import fit.example.login5.model.UserBean;
 import fit.example.login5.utils.ImageCodeUtils;
+import fit.example.login5.utils.Sm4Utils;
 import fit.example.login8.utils.JWTUtils;
 import fit.example.login8.utils.RedisUtils;
+import icu.xuyijie.sm4utils.util.SM4Utils;
 import redis.clients.jedis.Jedis;
 
 import javax.imageio.ImageIO;
@@ -56,6 +59,9 @@ public class LoginController extends HttpServlet {
         JSONObject inputJson = JSONObject.parseObject(String.valueOf(inputStr));
         String username = inputJson.get("username").toString();
         String password = inputJson.get("password").toString();
+        // 解密password
+        String pwd = Sm4Utils.decrypt(password);
+        pwd = MD5.create().digestHex(pwd);
         String verifyCode = inputJson.get("verifyCode").toString();
         String uuid = inputJson.get("uuid").toString();
         Jedis jedis = RedisUtils.getJedis();
@@ -76,7 +82,7 @@ public class LoginController extends HttpServlet {
         } else if (Objects.isNull(user)) {
             resMap.put("message", "用户名错误！");
             resMap.put("code", 500);
-        } else if (!user.getUserPwd().equals(password)) {
+        } else if (!user.getUserPwd().equals(pwd)) {
             resMap.put("message", "密码错误！");
             resMap.put("code", 500);
         } else {

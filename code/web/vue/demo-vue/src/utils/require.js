@@ -30,7 +30,7 @@ request.interceptors.response.use(response => {
             {type: "warning"}
         ).then(r => {
             console.log("跳转登录页面")
-            location.href = "/login";
+            location.href = "/#/login";
         });
     }
     return Promise.resolve(response.data);
